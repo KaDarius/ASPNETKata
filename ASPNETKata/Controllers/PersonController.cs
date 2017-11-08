@@ -12,23 +12,13 @@ namespace ASPNETKata.Controllers
         public ActionResult Index()
         {
             var list = new List<Person>();
-            list.Add(new Person { Age = 44, IsOwnerMinor = false, Name = "Ashe" });
-            list.Add(new Person { Age = 87, IsOwnerMinor = false, Name = "Zilean" });
-            list.Add(new Person { Age = 7, IsOwnerMinor = true, Name = "Fratrick" });
-            list.Add(new Person { Age = 87, IsOwnerMinor = false, Name = "DEEBO" });
-
-
-            public int ProductId { get; set; }
-            public Guid RowGuid { get; set; }
-            public string Name { get; set; }
-            public string ProductNumber { get; set; }
-            public double ListPrice { get; set; }
-            public string Color { get; set; }
-            public int DaysToManufacture { get; set; }
-            public double StandardCost { get; set; }    
-            
+            list.Add(new Person {Age = 44, IsOwnerMinor = false, Name = "Ashe"});
+            list.Add(new Person {Age = 87, IsOwnerMinor = false, Name = "Zilean"});
+            list.Add(new Person {Age = 7, IsOwnerMinor = true, Name = "Fratrick"});
+            list.Add(new Person {Age = 87, IsOwnerMinor = false, Name = "DEEBO"});
 
             return View(list);
+        }
     }
 
     // GET: Person/Details/5
