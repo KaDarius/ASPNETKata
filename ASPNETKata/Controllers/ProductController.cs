@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Dapper;
+using InversionOfControl.Shared;
+using MySql.Data.MySqlClient;
 
 namespace ASPNETKata.Controllers
 {
@@ -11,13 +12,27 @@ namespace ASPNETKata.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                var list = conn.Query<Product>("SELECT * from Product ORDER BY ProductId DESC");
+                return View(list);
+            }
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                var list = conn.Query<Product>("SELECT * from Product Where ProductId = @Id", new { Id = id });
+                return View(list.FirstOrDefault());
+            }
         }
 
         // GET: Product/Create
@@ -30,37 +45,44 @@ namespace ASPNETKata.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var name = collection["Name"];
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
             {
-                return View();
+                conn.Open();
+                conn.Execute("INSERT INTO product (Name) VALUES (@Name)", new { Name = name });
+                return RedirectToAction("Index");
             }
         }
 
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                var list = conn.Query<Product>("SELECT * from Product Where ProductId = @Id", new { Id = id });
+                return View(list.FirstOrDefault());
+            }
         }
 
         // POST: Product/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var name = collection["Name"];
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
             {
-                return View();
+                conn.Open();
+                conn.Execute("UPDATE product SET Name = @Name WHERE ProductId = @Id", new { Name = name, Id = id });
+                return RedirectToAction("Index");
             }
         }
 
@@ -74,16 +96,16 @@ namespace ASPNETKata.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var name = collection["Name"];
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
+            using (var conn = new MySqlConnection(connectionString))
             {
-                return View();
+                conn.Open();
+                conn.Execute("DELETE FROM product WHERE productId = @Id", new { Id = id});
+                return RedirectToAction("Index");
             }
         }
     }
-}
+} 
