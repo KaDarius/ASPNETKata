@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
+using ASPNETKATA.Shared;
 using Dapper;
 using InversionOfControl.Shared;
 using MySql.Data.MySqlClient;
