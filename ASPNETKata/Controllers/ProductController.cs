@@ -3,13 +3,20 @@ using System.Linq;
 using System.Web.Mvc;
 using ASPNETKATA.Shared;
 using Dapper;
-using InversionOfControl.Shared;
+using ASPNETKATA.Shared;
 using MySql.Data.MySqlClient;
 
 namespace ASPNETKata.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly IProductRepository repo;
+
+        public ProductController(IProductRepository repo)
+        {
+            this.repo = repo;
+        }
+
         // GET: Product
         public ActionResult Index()
         {
