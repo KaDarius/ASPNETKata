@@ -172,10 +172,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +246,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ASPNETKATA.Shared\ASPNETKATA.Shared.csproj">
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ASPNETKATA.Shared\ASPNETKata.Shared.csproj">
       <Project>{4bee0495-2ad7-428e-9daa-9c71db100c90}</Project>
-      <Name>ASPNETKATA.Shared</Name>
+      <Name>ASPNETKata.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Data;
-using ASPNETKATA.Shared;
+using System.Linq;
+using ASPNETKata.Shared;
+using Dapper;
 
-namespace ASPNETKATA.Shared
+namespace ASPNETKata.Shared
 {
     public class DapperProductRepository : IProductRepository
-    {
+    {   
         private readonly IDbConnection _connection;
 
         public DapperProductRepository(IDbConnection connection)
@@ -15,7 +17,7 @@ namespace ASPNETKATA.Shared
 
         public IEnumerable<Product> GetProducts()
         {
-            return _connection.Query<Product>("SELECT * from product");
+            return _connection.Query<Product>("SELECT * from product ORDER BY ProductID DESC");
         }
 
         public void DeleteProduct(int productId)
@@ -25,7 +27,8 @@ namespace ASPNETKATA.Shared
 
         public void UpdateProduct(Product prod)
         {
-            _connection.Execute("UPDATE Product SET Name = @name WHERE ProductId = @id", new { id = prod.ProductId, name = prod.Name });
+            _connection.Execute("UPDATE Product SET Name = @name WHERE ProductId = @id",
+                new { id = prod.ProductId, name = prod.Name });
         }
 
         public void InsertProduct(Product prod)
@@ -33,11 +36,10 @@ namespace ASPNETKATA.Shared
             _connection.Execute("INSERT into product (Name) values (@name)", new { name = prod.Name });
         }
 
-        /*
-        var cText = "INSERT into product (" + string.Join(", ", prod.Params.Keys) + ")";
-
-        var valueKeys = prod.Params.Keys.Select(str => "@" + str);
-        cText += " values (" + string.Join(", ", valueKeys) + ")";
-        */
+        public Product GetDetails(int productId)
+        {
+            return _connection.Query<Product>("SELECT * FROM Product WHERE ProductID = @id", new { id = productId })
+                .FirstOrDefault();
+        }
     }
 }

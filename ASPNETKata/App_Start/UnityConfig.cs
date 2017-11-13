@@ -3,8 +3,8 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
 using System.Data;
+using ASPNETKata.Shared;
 using MySql.Data.MySqlClient;
-using ASPNETKATA.Shared;
 
 namespace ASPNETKata.App_Start
 {
@@ -47,9 +47,8 @@ namespace ASPNETKata.App_Start
                 conn.Open();
                 return conn;
             }));
-            
-            container.RegisterType<IProductRepository, DapperProductRepository>(new TransientLifetimeManager());
+
+            container.RegisterType<IProductRepository, DapperProductRepository>();
         }
-    }
     }
 }

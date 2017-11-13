@@ -4,93 +4,86 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ASPNETKata.Controllers
+namespace ASPNETKata.Models
 {
     public class PersonController : Controller
     {
         // GET: Person
         public ActionResult Index()
         {
-            var list = new List<Person>();
-            list.Add(new Person {Age = 44, IsOwnerMinor = false, Name = "Ashe"});
-            list.Add(new Person {Age = 87, IsOwnerMinor = false, Name = "Zilean"});
-            list.Add(new Person {Age = 7, IsOwnerMinor = true, Name = "Fratrick"});
-            list.Add(new Person {Age = 87, IsOwnerMinor = false, Name = "DEEBO"});
-
-            return View(list);
+            return View();
         }
-    }
 
-    // GET: Person/Details/5
-    public ActionResult Details(int id)
-    {
-        return View();
-    }
-
-    // GET: Person/Create
-    public ActionResult Create()
-    {
-        return View();
-    }
-
-    // POST: Person/Create
-    [HttpPost]
-    public ActionResult Create(FormCollection collection)
-    {
-        try
-        {
-            // TODO: Add insert logic here
-
-            return RedirectToAction("Index");
-        }
-        catch
+        // GET: Person/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
-    }
 
-    // GET: Person/Edit/5
-    public ActionResult Edit(int id)
-    {
-        return View();
-    }
-
-    // POST: Person/Edit/5
-    [HttpPost]
-    public ActionResult Edit(int id, FormCollection collection)
-    {
-        try
-        {
-            // TODO: Add update logic here
-
-            return RedirectToAction("Index");
-        }
-        catch
+        // GET: Person/Create
+        public ActionResult Create()
         {
             return View();
         }
-    }
 
-    // GET: Person/Delete/5
-    public ActionResult Delete(int id)
-    {
-        return View();
-    }
-
-    // POST: Person/Delete/5
-    [HttpPost]
-    public ActionResult Delete(int id, FormCollection collection)
-    {
-        try
+        // POST: Person/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
-            // TODO: Add delete logic here
+            try
+            {
+                // TODO: Add insert logic here
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
-        catch
+
+        // GET: Person/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
+
+        // POST: Person/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Person/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Person/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
-}
 }

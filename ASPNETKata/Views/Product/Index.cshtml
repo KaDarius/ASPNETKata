@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ASPNETKata.Models.Product>
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<ASPNETKata.Shared.Product>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th></th>
     </tr>

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using ASPNETKATA.Shared;
 
-namespace ASPNETKATA.Shared
+namespace ASPNETKata.Shared
 {
     public interface IProductRepository
     {
@@ -9,5 +8,6 @@ namespace ASPNETKATA.Shared
         void DeleteProduct(int productId);
         void UpdateProduct(Product prod);
         void InsertProduct(Product prod);
+        Product GetDetails(int productId);
     }
 }
